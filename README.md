@@ -7,12 +7,11 @@ Exocet is a web-based application for monitoring and controlling a Protium-2500 
 - **Serial Port Connection:** Easily connect to and disconnect from the fuel cell via a specified COM port.
 - **Fuel Cell Control:** Start and stop the fuel cell, and control components like fans and blowers.
 - **Real-time Monitoring:** View live data streams and raw messages from the fuel cell.
-- **Data Persistence:** Utilizes QuestDB, a high-performance time-series database, for data storage (via Docker).
+- **Data Persistence:** Utilizes QuestDB, a high-performance time-series database, for data storage.
 
 ## Requirements
 
 - Python 3.13+
-- Docker
 - A Protium-2500 Fuel Cell
 
 ## Installation & Setup
@@ -30,11 +29,6 @@ Exocet is a web-based application for monitoring and controlling a Protium-2500 
     uv sync
     ```
 
-3.  **Start the QuestDB service:**
-    Make sure Docker is running, then start the QuestDB container:
-    ```bash
-    docker-compose up -d
-    ```
 
 ## Usage
 
@@ -79,6 +73,5 @@ python src/plot_polarization.py --file path/to/your/data.csv --area 125.0 --outp
 │   ├── fuel_cell_controller.py # Logic for fuel cell communication
 │   └── plot_polarization.py # Script to plot polarization curves
 ├── .gitignore             # Files to ignore in Git
-├── docker-compose.yml     # Docker configuration for QuestDB
 ├── pyproject.toml         # Project metadata and dependencies
 └── README.md              # This file
