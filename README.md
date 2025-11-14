@@ -24,13 +24,11 @@ Exocet is a web-based application for monitoring and controlling a Protium-2500 
     ```
 
 2.  **Install Python dependencies:**
-    It is recommended to use a virtual environment.
+    It is recommended to use a virtual environment. `uv` is used for package management.
     ```bash
-    python -m venv .venv
-    source .venv/bin/activate  # On Windows use `.venv\Scripts\activate`
-    pip install -r requirements.txt # You will need to create this file
+    # Install dependencies from pyproject.toml
+    uv sync
     ```
-    *Note: A `requirements.txt` file is not yet present in this project. You can create one from `pyproject.toml`.*
 
 3.  **Start the QuestDB service:**
     Make sure Docker is running, then start the QuestDB container:
