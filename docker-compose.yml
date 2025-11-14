@@ -1,0 +1,13 @@
+services:
+  questdb:
+    image: questdb/questdb:latest # Or a specific version like questdb/questdb:9.1.0
+    ports:
+      - "9000:9000" # Web Console
+      - "9009:9009" # InfluxDB Line Protocol (ILP)
+      - "8812:8812" # Postgres Wire Protocol
+    volumes:
+      - questdb_data:/var/lib/questdb # Persist QuestDB data
+
+
+volumes:
+  questdb_data:
