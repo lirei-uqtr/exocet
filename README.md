@@ -52,6 +52,22 @@ Exocet is a web-based application for monitoring and controlling a Protium-2500 
     - Use the sidebar commands to operate the fuel cell.
     - View real-time data and raw messages in the main dashboard.
 
+## Data Analysis
+
+### Polarization Curve
+
+To generate a polarization curve from a CSV data file, run the `plot_polarization.py` script.
+
+```bash
+python src/plot_polarization.py
+```
+
+This will create a `polarization_curve.png` file in the root of the project. You can customize the input file, active area, and output file name using command-line arguments:
+
+```bash
+python src/plot_polarization.py --file path/to/your/data.csv --area 125.0 --output my_plot.png
+```
+
 ## Project Structure
 
 ```
@@ -60,7 +76,8 @@ Exocet is a web-based application for monitoring and controlling a Protium-2500 
 ├── docs/                  # Documentation
 ├── src/                   # Source code
 │   ├── app.py             # Main Streamlit application
-│   └── fuel_cell_controller.py # Logic for fuel cell communication
+│   ├── fuel_cell_controller.py # Logic for fuel cell communication
+│   └── plot_polarization.py # Script to plot polarization curves
 ├── .gitignore             # Files to ignore in Git
 ├── docker-compose.yml     # Docker configuration for QuestDB
 ├── pyproject.toml         # Project metadata and dependencies
