@@ -1,6 +1,6 @@
 import pandas as pd
 import matplotlib.pyplot as plt
-import argparse
+import os
 
 def plot_polarization_curve(csv_file, active_area, output_file):
     """
@@ -28,6 +28,11 @@ def plot_polarization_curve(csv_file, active_area, output_file):
         ax.set_title("Polarization Curve")
         ax.grid(True)
 
+        # Create output directory if it doesn't exist
+        output_dir = os.path.dirname(output_file)
+        if output_dir:
+            os.makedirs(output_dir, exist_ok=True)
+
         # Save the plot
         plt.savefig(output_file)
         print(f"Plot saved to {output_file}")
@@ -40,26 +45,9 @@ def plot_polarization_curve(csv_file, active_area, output_file):
         print(f"An error occurred: {e}")
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Generate a polarization curve from fuel cell data.")
-    parser.add_argument(
-        '--file', 
-        type=str, 
-        default='data/V2.5.6-3-2303-18-A.csv', 
-        help='Path to the input CSV file.'
-    )
-    parser.add_argument(
-        '--area', 
-        type=float, 
-        default=100.0, 
-        help='Active area of the fuel cell in cm².'
-    )
-    parser.add_argument(
-        '--output', 
-        type=str, 
-        default='polarization_curve.png', 
-        help='Path to save the output plot image.'
-    )
+    # Define default parameters
+    csv_file = 'data/V2.5.6-3-2303-18-A.csv'
+    active_area = 100.0
+    output_file = 'data/figures/polarization_curve.png'
     
-    args = parser.parse_args()
-    
-    plot_polarization_curve(args.file, args.area, args.output)
+    plot_polarization_curve(csv_file, active_area, output_file)
