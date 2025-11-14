@@ -17,13 +17,10 @@ def plot_polarization_curve(csv_file, active_area, output_file):
         # Clean up column names by stripping whitespace
         df.columns = df.columns.str.strip()
 
-        # Calculate Current Density
-        df['Current Density (A/cm²)'] = df['FC_A (A)'] / active_area
-
         # Create the plot
         fig, ax = plt.subplots()
-        ax.plot(df['Current Density (A/cm²)'], df['FC_V (V)'], marker='o', linestyle='-')
-        ax.set_xlabel("Current Density (A/cm²)")
+        ax.scatter(df['FC_A (A)'], df['FC_V (V)'])
+        ax.set_xlabel("Current (A)")
         ax.set_ylabel("Voltage (V)")
         ax.set_title("Polarization Curve")
         ax.grid(True)
@@ -46,8 +43,8 @@ def plot_polarization_curve(csv_file, active_area, output_file):
 
 if __name__ == "__main__":
     # Define default parameters
-    csv_file = 'data/V2.5.6-3-2303-18-A.csv'
-    active_area = 100.0
+    csv_file = 'data/V2.5.6-3-2303-18-A-2.csv'
+    active_area = 1
     output_file = 'data/figures/polarization_curve.png'
     
     plot_polarization_curve(csv_file, active_area, output_file)
