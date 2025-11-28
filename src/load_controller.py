@@ -7,13 +7,16 @@ import time
 
 # --- Connection Settings ---
 SERIAL_PORT = 'COM9'
-BAUD_RATE = 38400 # Check your device's manual for the correct baud rate
+BAUD_RATE = 9600 # Trying a common default baud rate
 TIMEOUT = 1 # seconds
 
 ser = None
 try:
     # --- Setup Connection ---
+    # Per the manual, DTR and RTS must be enabled.
     ser = serial.Serial(SERIAL_PORT, BAUD_RATE, timeout=TIMEOUT)
+    ser.rts = True
+    ser.dtr = True
     print(f"Connected to {SERIAL_PORT} at {BAUD_RATE} baud.")
     time.sleep(0.1) # Short delay for device to initialize
 
@@ -22,6 +25,7 @@ try:
     def send_and_parse(command):
         """Sends a command and waits for and parses the 26-byte response."""
         ser.write(bytes(command))
+        time.sleep(0.2) # Add delay to allow device to process
         response_bytes = ser.read(26)
         if len(response_bytes) < 26:
             print(f"Warning: Received incomplete response ({len(response_bytes)} bytes).")
